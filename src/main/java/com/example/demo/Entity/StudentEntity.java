@@ -1,41 +1,50 @@
 package com.example.demo.Entity;
-import jakarta.persistance.*;
 
-
-
+import jakarta.persistence.*;
 
 @Entity
-public class StudentEntity{
+@Table(name = "student")
+public class StudentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long studentId;
 
     private String name;
-    private String father_name;
+    private String fatherName;
     private int age;
 
-    public long getId(){
+ 
+    public long getStudentId() {
         return studentId;
     }
 
-    public void setName(String name){
+  
+
+ 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
-    public void setName(String father_name ){
-        this.father_name = father_name;
+
+   
+    public String getFatherName() {
+        return fatherName;
     }
-    public void setName(int age){
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+
+  
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
         this.age = age;
     }
-     public String getName(){
-        return name;
-     }
-
-     public String getfather_name(){
-        return father_name;
-     }
-     public int getAge(){
-        return age;
-     }
 }
