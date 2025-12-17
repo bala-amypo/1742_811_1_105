@@ -6,6 +6,10 @@ import jakarta.persistance.Id;
 public class StudentEntity{
 
     @Id
-    private int studentId;
+    private long studentId;
+
+    private String name;
+    private String father_name;
+    private int age;
 
 }
