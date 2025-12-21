@@ -1,89 +1,71 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "Appointment")
 public class Appointment {
-
-    public Appointment() {}
-
- 
-    public enum Status {
-        SCHEDULED,
-        CANCELLED,
-        COMPLETED
-    }
-
-    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "visitor_id", nullable = false)
     private Visitor visitor;
 
     @ManyToOne
-    @JoinColumn(name = "host_id", nullable = false)
     private Host host;
 
+    private LocalDate appointmentDate;
     private String purpose;
+    private String status = "SCHEDULED";
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
-    private LocalDateTime createdAt;
-
-  
-
+    // getters and setters
     public Long getId() {
         return id;
     }
-
+ 
     public void setId(Long id) {
         this.id = id;
     }
-
+ 
     public Visitor getVisitor() {
         return visitor;
     }
-
+ 
     public void setVisitor(Visitor visitor) {
         this.visitor = visitor;
     }
-
+ 
     public Host getHost() {
         return host;
     }
-
+ 
     public void setHost(Host host) {
         this.host = host;
     }
-
+ 
+    public LocalDate getAppointmentDate() {
+        return appointmentDate;
+    }
+ 
+    public void setAppointmentDate(LocalDate appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+ 
     public String getPurpose() {
         return purpose;
     }
-
+ 
     public void setPurpose(String purpose) {
         this.purpose = purpose;
     }
-
-    public Status getStatus() {
+ 
+    public String getStatus() {
         return status;
     }
-
-    public void setStatus(Status status) {
+ 
+    public void setStatus(String status) {
         this.status = status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }
