@@ -1,0 +1,57 @@
+package com.example.demo.Service.Impl;
+
+import com.example.demo.Service.AppointmentService;
+import com.example.demo.Repository.*;
+import com.example.demo.Entity.*;
+import com.example.demo.Exception.*;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Service
+public class AppointmentServiceImpl implements AppointmentService {
+
+    private final AppointmentRepository appointmentRepository;
+    private final VisitorRepository visitorRepository;
+    private final HostRepository hostRepository;
+
+    public AppointmentServiceImpl(AppointmentRepository appointmentRepository,
+                                  VisitorRepository visitorRepository,
+                                  HostRepository hostRepository) {
+        this.appointmentRepository = appointmentRepository;
+        this.visitorRepository = visitorRepository;
+        this.hostRepository = hostRepository;
+    }
+
+    public Appointment createAppointment(Long visitorId, Long hostId, Appointment appointment) {
+
+        if (appointment.getAppointmentDate().isBefore(LocalDate.now())) {
+            throw new BadRequestException("appointmentDate cannot be past");
+        }
+
+        Visitor visitor = visitorRepository.findById(visitorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor not found"));
+
+        Host host = hostRepository.findById(hostId)
+                .orElseThrow(() -> new ResourceNotFoundException("Host not found"));
+
+        appointment.setVisitor(visitor);
+        appointment.setHost(host);
+
+        return appointmentRepository.save(appointment);
+    }
+
+    public Appointment getAppointment(Long id) {
+        return appointmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found"));
+    }
+
+    public List<Appointment> getAppointmentsForHost(Long hostId) {
+        return appointmentRepository.findByHostId(hostId);
+    }
+
+    public List<Appointment> getAppointmentsForVisitor(Long visitorId) {
+        return appointmentRepository.findByVisitorId(visitorId);
+    }
+}
