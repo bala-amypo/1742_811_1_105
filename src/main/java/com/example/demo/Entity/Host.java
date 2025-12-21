@@ -1,30 +1,37 @@
-package .com.example.demo.Entity;
+package com.example.demo.Entity;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(
     name = "Host",
-    uniqueConstraints={
-        @UniqueConstraint(
-            columnNames={"email"}
-        )
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"email"})
     }
 )
-public class Host{
-    public Host(){}
+public class Host {
+
+    public Host() {}
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String hostName;
+
     private String fullname;
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     private String email;
+
     private String department;
+
     private LocalDateTime createdAt;
 
-     public Long getId() {
+   
+
+    public Long getId() {
         return id;
     }
 
@@ -71,5 +78,4 @@ public class Host{
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-
 }
