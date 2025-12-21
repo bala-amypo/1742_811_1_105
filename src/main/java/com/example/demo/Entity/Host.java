@@ -13,5 +13,13 @@ import jakarta.persistence.*;
 public class Host{
     public Host(){}
 
+    @Id
+    @GeneratedValue(strategy=GeneratedType.IDENTITY)
+    private Long id;
+    private String hostName;
+    private String fullname;
+    @Column(nullable=false)
+    private String email;
+    private String department;
     
 }
