@@ -9,7 +9,7 @@ public class Appointment {
 
     public Appointment() {}
 
-    // ===== ENUM =====
+ 
     public enum Status {
         SCHEDULED,
         CANCELLED,
