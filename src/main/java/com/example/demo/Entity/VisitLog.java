@@ -5,21 +5,95 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "VisitLog")
-public class VisitLog{
-    public VisitLog(){}
+public class VisitLog {
+
+    public VisitLog() {}
+
     @Id
-    @GeneratedValue(strategy=GenerationValue.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "visitor_id")
+    @JoinColumn(name = "visitor_id", nullable = false)
     private Visitor visitor;
+
     @ManyToOne
-    @JoinColumn(name = "host_id")
+    @JoinColumn(name = "host_id", nullable = false)
     private Host host;
+
     private LocalDateTime appointmentDate;
+
     private LocalDateTime checkOutTime;
+
     private String purpose;
-    private Boolean access
 
+    private Boolean accessGranted;
 
+    private Boolean alertSent;
+
+   
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Visitor getVisitor() {
+        return visitor;
+    }
+
+    public void setVisitor(Visitor visitor) {
+        this.visitor = visitor;
+    }
+
+    public Host getHost() {
+        return host;
+    }
+
+    public void setHost(Host host) {
+        this.host = host;
+    }
+
+    public LocalDateTime getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(LocalDateTime appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public LocalDateTime getCheckOutTime() {
+        return checkOutTime;
+    }
+
+    public void setCheckOutTime(LocalDateTime checkOutTime) {
+        this.checkOutTime = checkOutTime;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public Boolean getAccessGranted() {
+        return accessGranted;
+    }
+
+    public void setAccessGranted(Boolean accessGranted) {
+        this.accessGranted = accessGranted;
+    }
+
+    public Boolean getAlertSent() {
+        return alertSent;
+    }
+
+    public void setAlertSent(Boolean alertSent) {
+        this.alertSent = alertSent;
+    }
 }
