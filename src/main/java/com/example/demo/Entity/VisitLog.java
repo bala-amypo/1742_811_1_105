@@ -7,5 +7,16 @@ import java.time.LocalDateTime;
 @Table(name = "VisitLog")
 public class VisitLog{
     public VisitLog(){}
-    
+    @Id
+    @GeneratedValue(strategy=GenerationValue.IDENTITY)
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "visitor_id")
+    private Visitor visitor;
+    @ManyToOne
+    @JoinColumn(name = "host_id")
+    private Host host;
+    private LocalDateTime 
+
+
 }
