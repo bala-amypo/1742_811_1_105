@@ -1,15 +1,15 @@
-package com.example.demo.Service;
+// package com.example.demo.Service;
 
-import java.util.List;
-import com.example.demo.Model.Appointment;
+// import java.util.List;
+// import com.example.demo.Model.Appointment;
 
-public interface AppointmentService {
+// public interface AppointmentService {
 
-    Appointment create(Long visitorId, Long hostId, Appointment appointment);
+//     Appointment create(Long visitorId, Long hostId, Appointment appointment);
 
-    Appointment getById(Long id);
+//     Appointment getById(Long id);
 
-    List<Appointment> getAll();
+//     List<Appointment> getAll();
 
-    void delete(Long id);
-}
+//     void delete(Long id);
+// }
