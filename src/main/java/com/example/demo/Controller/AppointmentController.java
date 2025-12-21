@@ -1,10 +1,10 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Entity.Appointment;
-import com.example.demo.Service.AppointmentService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import com.example.demo.Model.Appointment;
+import com.example.demo.Service.AppointmentService;
 
 @RestController
 @RequestMapping("/api/appointments")
@@ -17,25 +17,24 @@ public class AppointmentController {
     }
 
     @PostMapping("/{visitorId}/{hostId}")
-    public Appointment createAppointment(
-            @PathVariable Long visitorId,
-            @PathVariable Long hostId,
-            @RequestBody Appointment appointment) {
-        return appointmentService.createAppointment(visitorId, hostId, appointment);
+    public Appointment create(@PathVariable Long visitorId,
+                              @PathVariable Long hostId,
+                              @RequestBody Appointment appointment) {
+        return appointmentService.create(visitorId, hostId, appointment);
+    }
+
+    @GetMapping
+    public List<Appointment> getAll() {
+        return appointmentService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Appointment getAppointment(@PathVariable Long id) {
-        return appointmentService.getAppointment(id);
+    public Appointment getById(@PathVariable Long id) {
+        return appointmentService.getById(id);
     }
 
-    @GetMapping("/host/{hostId}")
-    public List<Appointment> getAppointmentsForHost(@PathVariable Long hostId) {
-        return appointmentService.getAppointmentsForHost(hostId);
-    }
-
-    @GetMapping("/visitor/{visitorId}")
-    public List<Appointment> getAppointmentsForVisitor(@PathVariable Long visitorId) {
-        return appointmentService.getAppointmentsForVisitor(visitorId);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        appointmentService.delete(id);
     }
 }

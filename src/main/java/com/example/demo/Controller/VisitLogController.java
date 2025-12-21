@@ -1,13 +1,13 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Entity.VisitLog;
-import com.example.demo.Service.VisitLogService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import com.example.demo.Model.VisitLog;
+import com.example.demo.Service.VisitLogService;
+
 @RestController
-@RequestMapping("/api/visits")
+@RequestMapping("/api/visitlogs")
 public class VisitLogController {
 
     private final VisitLogService visitLogService;
@@ -16,26 +16,28 @@ public class VisitLogController {
         this.visitLogService = visitLogService;
     }
 
-    @PostMapping("/checkin/{visitorId}/{hostId}")
-    public VisitLog checkIn(
-            @PathVariable Long visitorId,
-            @PathVariable Long hostId,
-            @RequestParam String purpose) {
-        return visitLogService.checkInVisitor(visitorId, hostId, purpose);
+    @PostMapping
+    public VisitLog create(@RequestBody VisitLog visitLog) {
+        return visitLogService.create(visitLog);
     }
 
-    @PostMapping("/checkout/{visitLogId}")
-    public VisitLog checkOut(@PathVariable Long visitLogId) {
-        return visitLogService.checkOutVisitor(visitLogId);
-    }
-
-    @GetMapping("/active")
-    public List<VisitLog> getActiveVisits() {
-        return visitLogService.getActiveVisits();
+    @GetMapping
+    public List<VisitLog> getAll() {
+        return visitLogService.getAll();
     }
 
     @GetMapping("/{id}")
-    public VisitLog getVisitLog(@PathVariable Long id) {
-        return visitLogService.getVisitLog(id);
+    public VisitLog getById(@PathVariable Long id) {
+        return visitLogService.getById(id);
+    }
+
+    @PutMapping("/checkout/{id}")
+    public VisitLog checkout(@PathVariable Long id) {
+        return visitLogService.checkout(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        visitLogService.delete(id);
     }
 }

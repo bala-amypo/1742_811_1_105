@@ -1,33 +1,38 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Entity.AlertNotification;
-import com.example.demo.Service.AlertNotificationService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import com.example.demo.Model.AlertNotification;
+import com.example.demo.Service.AlertNotificationService;
 
 @RestController
 @RequestMapping("/api/alerts")
 public class AlertNotificationController {
 
-    private final AlertNotificationService alertNotificationService;
+    private final AlertNotificationService alertService;
 
-    public AlertNotificationController(AlertNotificationService alertNotificationService) {
-        this.alertNotificationService = alertNotificationService;
+    public AlertNotificationController(AlertNotificationService alertService) {
+        this.alertService = alertService;
     }
 
-    @PostMapping("/send/{visitLogId}")
-    public AlertNotification sendAlert(@PathVariable Long visitLogId) {
-        return alertNotificationService.sendAlert(visitLogId);
-    }
-
-    @GetMapping("/{id}")
-    public AlertNotification getAlert(@PathVariable Long id) {
-        return alertNotificationService.getAlert(id);
+    @PostMapping
+    public AlertNotification create(@RequestBody AlertNotification alert) {
+        return alertService.create(alert);
     }
 
     @GetMapping
-    public List<AlertNotification> getAllAlerts() {
-        return alertNotificationService.getAllAlerts();
+    public List<AlertNotification> getAll() {
+        return alertService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public AlertNotification getById(@PathVariable Long id) {
+        return alertService.getById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        alertService.delete(id);
     }
 }

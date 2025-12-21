@@ -1,10 +1,10 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Entity.Visitor;
-import com.example.demo.Service.VisitorService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import com.example.demo.Model.Visitor;
+import com.example.demo.Service.VisitorService;
 
 @RestController
 @RequestMapping("/api/visitors")
@@ -17,17 +17,27 @@ public class VisitorController {
     }
 
     @PostMapping
-    public Visitor createVisitor(@RequestBody Visitor visitor) {
-        return visitorService.createVisitor(visitor);
+    public Visitor create(@RequestBody Visitor visitor) {
+        return visitorService.create(visitor);
     }
 
     @GetMapping
-    public List<Visitor> getAllVisitors() {
-        return visitorService.getAllVisitors();
+    public List<Visitor> getAll() {
+        return visitorService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Visitor getVisitor(@PathVariable Long id) {
-        return visitorService.getVisitor(id);
+    public Visitor getById(@PathVariable Long id) {
+        return visitorService.getById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Visitor update(@PathVariable Long id, @RequestBody Visitor visitor) {
+        return visitorService.update(id, visitor);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        visitorService.delete(id);
     }
 }
