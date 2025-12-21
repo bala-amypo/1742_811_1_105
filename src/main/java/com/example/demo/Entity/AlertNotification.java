@@ -1,4 +1,4 @@
-package com.example.demo.Entity;
+package com.example.demo.Enitity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -10,42 +10,28 @@ public class AlertNotification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private VisitLog visitLog;
-
     private String message;
-    private LocalDateTime sentAt;
+    private String type;
+    private boolean readStatus;
+    private LocalDateTime createdAt;
 
-    // getters & setters
-    public Long getId() {
-        return id;
+    @PrePersist
+    void onCreate() {
+        createdAt = LocalDateTime.now();
+        readStatus = false;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public VisitLog getVisitLog() {
-        return visitLog;
-    }
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 
-    public void setVisitLog(VisitLog visitLog) {
-        this.visitLog = visitLog;
-    }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
 
-    public String getMessage() {
-        return message;
-    }
+    public boolean isReadStatus() { return readStatus; }
+    public void setReadStatus(boolean readStatus) { this.readStatus = readStatus; }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public LocalDateTime getSentAt() {
-        return sentAt;
-    }
-
-    public void setSentAt(LocalDateTime sentAt) {
-        this.sentAt = sentAt;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
 }

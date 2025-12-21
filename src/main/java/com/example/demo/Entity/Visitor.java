@@ -1,4 +1,4 @@
-package com.example.demo.Model;
+package com.example.demo.Enitity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -17,11 +17,10 @@ public class Visitor {
     private LocalDateTime createdAt;
 
     @PrePersist
-    public void onCreate() {
+    void onCreate() {
         createdAt = LocalDateTime.now();
     }
 
-    // getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
