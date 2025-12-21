@@ -13,49 +13,39 @@ public class AlertNotification {
     @OneToOne
     private VisitLog visitLog;
 
-    private String sentTo;
-    private String alertMessage;
+    private String message;
     private LocalDateTime sentAt;
 
-    @PrePersist
-    public void onSend() {
-        this.sentAt = LocalDateTime.now();
-    }
-
-    // getters and setters
+    // getters & setters
     public Long getId() {
         return id;
     }
- 
+
     public void setId(Long id) {
         this.id = id;
     }
- 
+
     public VisitLog getVisitLog() {
         return visitLog;
     }
- 
+
     public void setVisitLog(VisitLog visitLog) {
         this.visitLog = visitLog;
     }
- 
-    public String getSentTo() {
-        return sentTo;
+
+    public String getMessage() {
+        return message;
     }
- 
-    public void setSentTo(String sentTo) {
-        this.sentTo = sentTo;
+
+    public void setMessage(String message) {
+        this.message = message;
     }
- 
-    public String getAlertMessage() {
-        return alertMessage;
-    }
- 
-    public void setAlertMessage(String alertMessage) {
-        this.alertMessage = alertMessage;
-    }
- 
+
     public LocalDateTime getSentAt() {
         return sentAt;
+    }
+
+    public void setSentAt(LocalDateTime sentAt) {
+        this.sentAt = sentAt;
     }
 }
