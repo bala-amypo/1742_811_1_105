@@ -16,7 +16,10 @@ public class VisitLog{
     @ManyToOne
     @JoinColumn(name = "host_id")
     private Host host;
-    private LocalDateTime 
+    private LocalDateTime appointmentDate;
+    private LocalDateTime checkOutTime;
+    private String purpose;
+    private Boolean access
 
 
 }
