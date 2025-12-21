@@ -1,12 +1,15 @@
 package com.example.demo.Service;
 
-import com.example.demo.Entity.Appointment;
 import java.util.List;
+import com.example.demo.Model.Appointment;
 
 public interface AppointmentService {
 
-    Appointment createAppointment(Long visitorId, Long hostId, Appointment appointment);
-    Appointment getAppointment(Long id);
-    List<Appointment> getAppointmentsForHost(Long hostId);
-    List<Appointment> getAppointmentsForVisitor(Long visitorId);
+    Appointment create(Long visitorId, Long hostId, Appointment appointment);
+
+    Appointment getById(Long id);
+
+    List<Appointment> getAll();
+
+    void delete(Long id);
 }

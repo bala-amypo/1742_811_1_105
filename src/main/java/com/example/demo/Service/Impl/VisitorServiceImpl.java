@@ -1,12 +1,11 @@
 package com.example.demo.Service.Impl;
 
-import com.example.demo.Service.VisitorService;
-import com.example.demo.Repository.VisitorRepository;
-import com.example.demo.Entity.Visitor;
-import com.example.demo.Exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import com.example.demo.Model.Visitor;
+import com.example.demo.Repository.VisitorRepository;
+import com.example.demo.Service.VisitorService;
 
 @Service
 public class VisitorServiceImpl implements VisitorService {
@@ -17,16 +16,28 @@ public class VisitorServiceImpl implements VisitorService {
         this.visitorRepository = visitorRepository;
     }
 
-    public Visitor createVisitor(Visitor visitor) {
+    public Visitor create(Visitor visitor) {
         return visitorRepository.save(visitor);
     }
 
-    public Visitor getVisitor(Long id) {
-        return visitorRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Visitor not found"));
+    public Visitor getById(Long id) {
+        return visitorRepository.findById(id).orElseThrow();
     }
 
-    public List<Visitor> getAllVisitors() {
+    public List<Visitor> getAll() {
         return visitorRepository.findAll();
+    }
+
+    public Visitor update(Long id, Visitor visitor) {
+        Visitor v = getById(id);
+        v.setFullName(visitor.getFullName());
+        v.setEmail(visitor.getEmail());
+        v.setPhone(visitor.getPhone());
+        v.setIdProofNumber(visitor.getIdProofNumber());
+        return visitorRepository.save(v);
+    }
+
+    public void delete(Long id) {
+        visitorRepository.deleteById(id);
     }
 }

@@ -1,49 +1,34 @@
 package com.example.demo.Service.Impl;
 
-import com.example.demo.Service.UserService;
-import com.example.demo.Repository.UserRepository;
-import com.example.demo.Entity.User;
-import com.example.demo.Dto.*;
-import com.example.demo.Exception.BadRequestException;
-import com.example.demo.security.JwtUtil;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.List;
+
+import com.example.demo.Model.User;
+import com.example.demo.Repository.UserRepository;
+import com.example.demo.Service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final JwtUtil jwtUtil;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public UserServiceImpl(UserRepository userRepository, JwtUtil jwtUtil) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.jwtUtil = jwtUtil;
     }
 
-    public void register(RegisterRequest request) {
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new BadRequestException("User already exists");
-        }
-
-        User user = new User();
-        user.setUsername(request.getUsername());
-        user.setEmail(request.getEmail());
-        user.setPassword(encoder.encode(request.getPassword()));
-        user.setRole("USER");
-
-        userRepository.save(user);
+    public User create(User user) {
+        return userRepository.save(user);
     }
 
-    public AuthResponse login(AuthRequest request) {
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new BadRequestException("Invalid credentials"));
+    public User getById(Long id) {
+        return userRepository.findById(id).orElseThrow();
+    }
 
-        if (!encoder.matches(request.getPassword(), user.getPassword())) {
-            throw new BadRequestException("Invalid credentials");
-        }
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
 
-        String token = jwtUtil.generateToken(user.getEmail());
-        return new AuthResponse(token);
+    public void delete(Long id) {
+        userRepository.deleteById(id);
     }
 }

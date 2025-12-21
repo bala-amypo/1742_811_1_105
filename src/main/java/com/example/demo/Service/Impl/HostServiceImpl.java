@@ -1,13 +1,11 @@
 package com.example.demo.Service.Impl;
 
-import com.example.demo.Service.HostService;
-import com.example.demo.Repository.HostRepository;
-import com.example.demo.Entity.Host;
-import com.example.demo.Exception.ResourceNotFoundException;
-import com.example.demo.Exception.BadRequestException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import com.example.demo.Model.Host;
+import com.example.demo.Repository.HostRepository;
+import com.example.demo.Service.HostService;
 
 @Service
 public class HostServiceImpl implements HostService {
@@ -18,19 +16,19 @@ public class HostServiceImpl implements HostService {
         this.hostRepository = hostRepository;
     }
 
-    public Host createHost(Host host) {
-        if (hostRepository.findByEmail(host.getEmail()).isPresent()) {
-            throw new BadRequestException("Host not found");
-        }
+    public Host create(Host host) {
         return hostRepository.save(host);
     }
 
-    public Host getHost(Long id) {
-        return hostRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Host not found"));
+    public Host getById(Long id) {
+        return hostRepository.findById(id).orElseThrow();
     }
 
-    public List<Host> getAllHosts() {
+    public List<Host> getAll() {
         return hostRepository.findAll();
+    }
+
+    public void delete(Long id) {
+        hostRepository.deleteById(id);
     }
 }
