@@ -1,11 +1,12 @@
 package com.example.demo.Service.Impl;
 
-import com.example.demo.Service.*;
-import com.example.demo.Repository.*;
-import com.example.demo.Entity.*;
-import com.example.demo.Exception.*;
-import java.util.*;
+import com.example.demo.Service.VisitorService;
+import com.example.demo.Repository.VisitorRepository;
+import com.example.demo.Entity.Visitor;
+import com.example.demo.Exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class VisitorServiceImpl implements VisitorService {
@@ -22,7 +23,7 @@ public class VisitorServiceImpl implements VisitorService {
 
     public Visitor getVisitor(Long id) {
         return visitorRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Visitor not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor not found"));
     }
 
     public List<Visitor> getAllVisitors() {
