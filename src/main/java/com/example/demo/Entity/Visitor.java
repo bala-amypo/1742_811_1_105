@@ -2,9 +2,12 @@ package .com.example.demo.Entity
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Visitor",uniqueConstraints={
-    @UniqueConsraint
-})
+@Table(
+    name = "Visitor",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"email"})
+    }
+)
 
 public class Visitor{
     public Visitor(){}
@@ -13,5 +16,5 @@ public class Visitor{
     private Long id;
     private String fullName;
     private String email;
-    private
+    private 
 }
