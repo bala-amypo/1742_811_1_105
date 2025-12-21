@@ -1,5 +1,6 @@
 package .com.example.demo.Entity
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(
@@ -16,5 +17,7 @@ public class Visitor{
     private Long id;
     private String fullName;
     private String email;
-    private 
+    private String phone;
+    private String idProofNumber;
+    private LocalDateTime createdAt;
 }
