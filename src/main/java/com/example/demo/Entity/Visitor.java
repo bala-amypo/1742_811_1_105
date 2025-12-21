@@ -1,6 +1,7 @@
-package com.example.demo.Entity;
+package com.example.demo.Model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Visitor {
@@ -12,37 +13,29 @@ public class Visitor {
     private String fullName;
     private String email;
     private String phone;
+    private String idProofNumber;
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 
     // getters & setters
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
-    public String getFullName() {
-        return fullName;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getIdProofNumber() { return idProofNumber; }
+    public void setIdProofNumber(String idProofNumber) { this.idProofNumber = idProofNumber; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
 }
