@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.demo.Entity.Visitor;
 import com.example.demo.Repository.VisitorRepository;
 import com.example.demo.Service.VisitorService;
-
+import com.example.demo.exception.ResourceNotFoundException;
 @Service
 public class VisitorServiceImpl implements VisitorService {
 
@@ -21,7 +21,7 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     public Visitor getById(Long id) {
-        return repo.findById(id).orElseThrow(()->new );
+        return repo.findById(id).orElseThrow(()->new ResourceNotFoundException("Visitor not found" + id ));
     }
 
     public List<Visitor> getAll() {
