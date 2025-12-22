@@ -21,7 +21,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     public Appointment getById(Long id) {
-        return repo.findById(id).orElseThrow("Appointment");
+        return repo.findById(id).orElseThrow(() ->
+            new RuntimeException("Appointment not found with id: " + id)
+        );
     }
 
     public List<Appointment> getAll() {
