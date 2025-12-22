@@ -11,6 +11,8 @@ public class Visitor {
     private Long id;
 
     private String fullName;
+    @Column(unique=true,nullable=false)
+    @Email
     private String email;
     private String phone;
     private String idProofNumber;
