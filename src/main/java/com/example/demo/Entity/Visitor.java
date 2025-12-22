@@ -14,6 +14,7 @@ public class Visitor {
     @Column(unique=true,nullable=false)
     @Email
     private String email;
+    
     private String phone;
     private String idProofNumber;
     private LocalDateTime createdAt;
