@@ -21,7 +21,7 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     public Visitor getById(Long id) {
-        return repo.findById(id).orElseThrow();
+        return repo.findById(id).orElseThrow(()->new );
     }
 
     public List<Visitor> getAll() {
