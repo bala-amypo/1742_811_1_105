@@ -50,20 +50,20 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Spring Security (BCryptPasswordEncoder) -->
+        <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- MySQL (Production) -->
+        <!-- MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- H2 (Tests / Dev) -->
+        <!-- H2 (tests only) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -89,7 +89,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Swagger / OpenAPI -->
+        <!-- Swagger -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -104,25 +104,14 @@
         </dependency>
 
         <!-- ========================= -->
-        <!-- TESTING (TestNG ONLY) -->
+        <!-- TESTING (NO JUNIT AT ALL) -->
         <!-- ========================= -->
 
-        <!-- Spring Test utilities (ReflectionTestUtils etc.) -->
+        <!-- Spring Test (ReflectionTestUtils) -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
             <scope>test</scope>
-            <exclusions>
-                <!-- REMOVE JUNIT -->
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.junit.jupiter</groupId>
-                    <artifactId>junit-jupiter</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- TestNG -->
@@ -155,20 +144,20 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- SUREFIRE: TESTNG ONLY -->
+            <!-- SUREFIRE: FORCE TESTNG -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
                     <useModulePath>false</useModulePath>
-                    <providers>
-                        <provider>
-                            <name>testng</name>
-                        </provider>
-                    </providers>
+
+                    <!-- FORCE TESTNG (NO JUNIT) -->
+                    <provider>
+                        <name>testng</name>
+                    </provider>
+
                     <includes>
-                        <!-- IMPORTANT: supports AuthTests -->
                         <include>**/*Test*.java</include>
                     </includes>
                 </configuration>
