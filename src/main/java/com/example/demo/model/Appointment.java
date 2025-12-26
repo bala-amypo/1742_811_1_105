@@ -31,7 +31,7 @@ public class Appointment {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status;
+    private AppointmentStatus status;
 
     public Appointment() {
     }
@@ -83,11 +83,11 @@ public class Appointment {
         this.purpose = purpose;
     }
 
-    public String getStatus() {
+    public AppointmentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(AppointmentStatus status) {
         this.status = status;
     }
 }
