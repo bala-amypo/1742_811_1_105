@@ -6,6 +6,12 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "appointments")
 public class Appointment {
+    public enum AppointmentStatus {
+        SCHEDULED,
+        CANCELLED,
+        COMPLETED
+    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +28,10 @@ public class Appointment {
     private LocalDate appointmentDate;
 
     private String purpose;
-
-    private String status;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private String status = AppointmentStatus.SCHEDULED;
 
     public Appointment() {
     }
