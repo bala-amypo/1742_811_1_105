@@ -6,12 +6,13 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "appointments")
 public class Appointment {
+
+   
     public enum AppointmentStatus {
         SCHEDULED,
         CANCELLED,
         COMPLETED
     }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,20 +29,22 @@ public class Appointment {
     private LocalDate appointmentDate;
 
     private String purpose;
-    
-    @Enumerated(EnumType.STRING)
+
+ 
     @Column(nullable = false)
-    private AppointmentStatus status;
+    private String status;
 
-    public Appointment() {
-    }
+    public Appointment() {}
 
+   
     @PrePersist
     public void setDefaultStatus() {
         if (this.status == null) {
-            this.status = AppointmentStatus.SCHEDULED;
+            this.status = AppointmentStatus.SCHEDULED.name();
         }
     }
+
+    // ===== getters & setters =====
 
     public Long getId() {
         return id;
@@ -83,11 +86,12 @@ public class Appointment {
         this.purpose = purpose;
     }
 
-    public AppointmentStatus getStatus() {
+    
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(AppointmentStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }
