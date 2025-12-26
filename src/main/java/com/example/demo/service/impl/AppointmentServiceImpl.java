@@ -36,6 +36,9 @@ public class AppointmentServiceImpl implements AppointmentService {
                 appointment.getAppointmentDate().isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("appointmentDate cannot be past");
         }
+        if (appointment.getStatus() == null) {
+        appointment.setStatus(AppointmentStatus.SCHEDULED);
+        }
 
         Visitor visitor = visitorRepository.findById(visitorId)
                 .orElseThrow(() -> new RuntimeException("Visitor not found"));
