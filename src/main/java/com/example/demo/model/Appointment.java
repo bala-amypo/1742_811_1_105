@@ -31,7 +31,7 @@ public class Appointment {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status = AppointmentStatus.SCHEDULED;
+    private String status;
 
     public Appointment() {
     }
@@ -39,7 +39,7 @@ public class Appointment {
     @PrePersist
     public void setDefaultStatus() {
         if (this.status == null) {
-            this.status = "SCHEDULED";
+            this.status = AppointmentStatus.SCHEDULED;
         }
     }
 
