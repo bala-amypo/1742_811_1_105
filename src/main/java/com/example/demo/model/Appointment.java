@@ -32,7 +32,7 @@ public class Appointment {
 
  
     @Column(nullable = false)
-    private String status = AppointmentStatus.SCHEDULED.name();
+    private String status = "SCHEDULED";
 
     public Appointment() {
          if (this.status == null) {
