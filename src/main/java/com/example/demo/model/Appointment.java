@@ -7,7 +7,6 @@ import java.time.LocalDate;
 @Table(name = "appointments")
 public class Appointment {
 
-   
     public enum AppointmentStatus {
         SCHEDULED,
         CANCELLED,
@@ -27,19 +26,23 @@ public class Appointment {
     private Host host;
 
     private LocalDate appointmentDate;
-
     private String purpose;
 
- 
+    // ✅ Allow null in Java, but DB default will be applied
     @Column(nullable = true)
     private String status;
 
     public Appointment() {
-        
+        // keep empty
     }
 
-   
-    
+    // ✅ DEFAULT SET ONLY WHEN SAVED
+    @PrePersist
+    public void applyDefaultStatus() {
+        if (this.status == null) {
+            this.status = AppointmentStatus.SCHEDULED.name();
+        }
+    }
 
     // ===== getters & setters =====
 
@@ -83,7 +86,6 @@ public class Appointment {
         this.purpose = purpose;
     }
 
-    
     public String getStatus() {
         return status;
     }
