@@ -31,25 +31,31 @@ public class AppointmentServiceImpl implements AppointmentService {
         this.hostRepository = hostRepository;
     }
 
-    @Override
-    public Appointment createAppointment(Long visitorId, Long hostId, Appointment appointment) {
+   @Override
+public Appointment createAppointment(Long visitorId, Long hostId, Appointment appointment) {
 
-        if (appointment.getAppointmentDate() != null &&
-                appointment.getAppointmentDate().isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("appointmentDate cannot be past");
-        }
-       
-        Visitor visitor = visitorRepository.findById(visitorId)
-                .orElseThrow(() -> new RuntimeException("Visitor not found"));
-
-        Host host = hostRepository.findById(hostId)
-                .orElseThrow(() -> new RuntimeException("Host not found"));
-
-        appointment.setVisitor(visitor);
-        appointment.setHost(host);
-
-        return appointmentRepository.save(appointment);
+    if (appointment.getAppointmentDate() != null &&
+            appointment.getAppointmentDate().isBefore(LocalDate.now())) {
+        throw new IllegalArgumentException("appointmentDate cannot be past");
     }
+
+    Visitor visitor = visitorRepository.findById(visitorId)
+            .orElseThrow(() -> new RuntimeException("Visitor not found"));
+
+    Host host = hostRepository.findById(hostId)
+            .orElseThrow(() -> new RuntimeException("Host not found"));
+
+    appointment.setVisitor(visitor);
+    appointment.setHost(host);
+
+    // ✅ THIS LINE IS REQUIRED BY test038
+    if (appointment.getStatus() == null) {
+        appointment.setStatus("SCHEDULED");
+    }
+
+    return appointmentRepository.save(appointment);
+}
+
 
     @Override
     public Appointment getAppointment(Long id) {
