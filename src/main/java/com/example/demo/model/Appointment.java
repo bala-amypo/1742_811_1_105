@@ -31,22 +31,15 @@ public class Appointment {
     private String purpose;
 
  
-    @Column(nullable = false)
-    private String status = "SCHEDULED";
+    @Column(nullable = true)
+    private String status;
 
     public Appointment() {
-         if (this.status == null) {
-            this.status = "SCHEDULED";
-        }
+        
     }
 
    
-    @PrePersist
-    public void setDefaultStatus() {
-        if (this.status == null) {
-            this.status = "SCHEDULED";
-        }
-    }
+    
 
     // ===== getters & setters =====
 
